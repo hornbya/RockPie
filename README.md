@@ -1,5 +1,5 @@
 # RockPie
-RockPie 0.x - ImageJ macro for segmentation of SEM imagery into three components
+RockPie - ImageJ macro for segmentation of SEM imagery into three components
 
 The macro is based on the Ash-surface-salts macro described in Casas et al. Bull Volcanol 84, 3 (2022) - https://doi.org/10.1007/s00445-021-01519-3 - https://github.com/hornbya/Ash-surface-salts - and is designed to segment 8-bit images into three components defined by greyscale shade and/or relative component size. 
 The macro uses a set of plugins: MorphoLibJ https://imagej.net/MorphoLibJ (doi.org/10.1093/bioinformatics/btw413), Shape Filter https://imagej.net/Shape_Filter (http://dx.doi.org/10.5334/jors.ae), Non-local means denoising https://imagej.net/plugins/non-local-means-denoise/index, (Beat) Disconnect Particles plugins https://imagej.net/people/bmuench and Read and Write Excel (https://imagej.net/User:ResultsToExcel).
