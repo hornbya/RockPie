@@ -1,5 +1,5 @@
 # RockPie
-RockPie 0.x - IMageJ macro for segmentation of SEM imagery into three components
+RockPie 0.x - ImageJ macro for segmentation of SEM imagery into three components
 
 The macro is based on the Ash-surface-salts macro described in Casas et al. Bull Volcanol 84, 3 (2022) - https://doi.org/10.1007/s00445-021-01519-3 - https://github.com/hornbya/Ash-surface-salts - and is designed to segment 8-bit images into three components defined by greyscale shade and/or relative component size. 
 The macro uses a set of plugins: MorphoLibJ https://imagej.net/MorphoLibJ (doi.org/10.1093/bioinformatics/btw413), Shape Filter https://imagej.net/Shape_Filter (http://dx.doi.org/10.5334/jors.ae), Non-local means denoising https://imagej.net/plugins/non-local-means-denoise/index, (Beat) Disconnect Particles plugins https://imagej.net/people/bmuench and Read and Write Excel (https://imagej.net/User:ResultsToExcel).
@@ -15,10 +15,9 @@ March 2022:
 Native image processing and 'cleanup' options are added and segmentation by greyscale path improved.
 - NLMD-processed images now persist through all thresholding steps
 - Remove Outliers option added to manual editing function (along with image editing hint message)
-- Disconnect Particles function fixed.
-- Target image now saving with binary corrected
+- Disconnect Particles function and Shape filter binary-switching bugs fixed.
 - Brightness and contrast option replaced with Window/Level and instruction message added
-- Bandpass filter is now initially a cehckbox option (same 'preview first' sequence applies if selected)
+- Bandpass filter is now initially a checkbox option (same 'preview first' sequence applies if selected)
 
 The macro has tested using Windows 10, but there should be no compatibility issues with recent versions of Windows or Mac OSs. Most image formats are accepted by ImageJ.
 The macro is designed for use with greyscale images. A range of SEM-SE and BSE images have been tested, but the macro should cope with color images converted to 8-bit greyscale if there is enough contrast between components.
