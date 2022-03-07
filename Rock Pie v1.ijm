@@ -395,7 +395,7 @@ macro "Rock pie macro" {
 		rbfilt=Dialog.getCheckbox();
 		if (bandc==1) {
 			run("Window/Level...");
-			waitForUser("Set brightness and contrast... then click 'Apply (don't worry if it appears to reset)");
+			waitForUser("Set window and level... then click 'Apply (don't worry if it appears to reset)");
 			run("Apply LUT");
 			if (isOpen("W&L")) {
 				selectWindow("W&L");
