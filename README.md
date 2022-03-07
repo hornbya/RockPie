@@ -5,7 +5,7 @@ The macro is based on the Ash-surface-salts macro described in Casas et al. Bull
 The macro uses a set of plugins: MorphoLibJ https://imagej.net/MorphoLibJ (doi.org/10.1093/bioinformatics/btw413), Shape Filter https://imagej.net/Shape_Filter (http://dx.doi.org/10.5334/jors.ae), Non-local means denoising https://imagej.net/plugins/non-local-means-denoise/index, (Beat) Disconnect Particles plugins https://imagej.net/people/bmuench and Read and Write Excel (https://imagej.net/User:ResultsToExcel).
 Calculation-only functions and data table management standalone macros work as described here https://github.com/hornbya/Ash-surface-salts
 
-Requirements: ImageJ or Fiji v1.52 with a set of plugins enabled by subscribing to the following update sites (via Help > Update… >Manage Update Sites)
+Requirements: ImageJ or Fiji v1.52 or newer with a set of plugins enabled by subscribing to the following update sites (via Help > Update… >Manage Update Sites)
 -	Biomedgroup (Shape Filter and Non-Local Means Denoise)
 -	IJPB-plugins (MorphoLibJ)
 -	Xlib (Disconnect Particles)
