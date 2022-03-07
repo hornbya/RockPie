@@ -11,11 +11,13 @@ Requirements: ImageJ or Fiji v1.52 with a set of plugins enabled by subscribing 
 -	Xlib (Disconnect Particles)
 -	ResultsToExcel (Read and Write Excel)
 
-March 2022: 
+March 2022: Segmentation by greyscale path working. Segmentation by size working so long as the 'target' and 'non-target' components are defined for size segmentation (e.g. - make sure the background really is the background for this measurement).
+
 Native image processing and 'cleanup' options are added and segmentation by greyscale path improved.
 - NLMD-processed images now persist through all thresholding steps
 - Remove Outliers option added to manual editing function (along with image editing hint message)
 - Disconnect Particles function and Shape filter binary-switching bugs fixed.
+- Message added to select the target and non-target components carefully for size segmentation
 - Brightness and contrast option replaced with Window/Level and instruction message added
 - Bandpass filter is now initially a checkbox option (same 'preview first' sequence applies if selected)
 
