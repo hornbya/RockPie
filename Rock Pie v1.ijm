@@ -2,9 +2,9 @@
 //"Rock pie" by Adrian Hornby
 //Component analysis for high-magnification SEM images
 
-//The macro segments and measures the area fraction of background, target components,
-//and non-target components in a greyscale SEM image, and finally measures
-//the size and shape of the target components on a single-particle basis.
+//The macro is written in IJ1 Macro language. It segments and measures the area fraction 
+//of background, target components, and non-target components in a greyscale SEM image 
+//and then measures the size and shape of the target components on a single-particle basis.
 //Output files are saved in a folder using the original image file name as title.
 //MorphoLibJ, Shape Filter, Non-local means denoising and Beat (xlib) plugins are required.
 //See Readme for instructions etc.
@@ -148,7 +148,6 @@ macro "Rock pie macro" {
 	function disconnectparticles () {
 		Dialog.create("Disconnect particles");
 		Dialog.addCheckbox("Separate touching particles?", 1);
-		Dialog.addCheckbox("Invert image?", 0)
 		Dialog.addNumber("Disconnect level 0-1 (1 = max. disconnects, 0.8 = default)", "0.8");
 		Dialog.show();
 		dc=Dialog.getCheckbox();
@@ -166,8 +165,9 @@ macro "Rock pie macro" {
 			setThreshold(1, 255);
 			setOption("BlackBackground", true);
 			run("Convert to Mask");
-			run("Close");
+			//run("Close");
 			run("Set Scale...", "distance="+scaleL+" known="+scale+" pixel=1 unit=um");
+			waitForUser("Check binary");
 			Dialog.create("Disconnect check");
 			Dialog.addCheckbox("Accept particle separation? (leave unticked to change disconnection level)", 0);
 			Dialog.show();
@@ -177,8 +177,7 @@ macro "Rock pie macro" {
 				disconnectparticles();
 			}
 		disconnected=getTitle();
-		run("Invert");
-		saveAs(path4)	
+		saveAs(path4);	
 		}
 	}	
 
@@ -245,7 +244,6 @@ macro "Rock pie macro" {
 		Dialog.create("Edges");
 		Dialog.addCheckbox("Exclude "+tc+" on edges from single-particle measurements?", 1);
 		Dialog.show();
-		run("Invert");
 		if (Dialog.getCheckbox()==1)
 			run("Shape Filter", "area=0-Infinity area_convex_hull=0-Infinity perimeter=0-Infinity perimeter_convex_hull=0-Infinity feret_diameter=0-Infinity min._feret_diameter=0-Infinity max._inscr._circle_diameter=0-Infinity area_eq._circle_diameter=0-Infinity long_side_min._bounding_rect.=0-Infinity short_side_min._bounding_rect.=0-Infinity aspect_ratio=1-Infinity area_to_perimeter_ratio=0-Infinity circularity=0-Infinity elongation=0-1 convexity=0-1 solidity=0-1 num._of_holes=0-Infinity thinnes_ratio=0-1 contour_temperatur=0-1 orientation=0-180 fractal_box_dimension=0-2 option->box-sizes=2,3,4,6,8,12,16,32,64 add_to_manager draw_holes black_background fill_results_table exclude_on_edges");
 		else
@@ -591,9 +589,10 @@ macro "Rock pie macro" {
 		run("Invert");
 		imageCalculator("Difference create", "bkg", "contrThr2");
 		run("Make Binary");
+		run("Invert");
 		rename("nonCon");
-		//if(thrch=="size?")
-		//run("Invert");//why?
+		waitForUser("check binary");
+
 		close("bkg");
 		close("contrThr2");
 		selectWindow("nonCon");
@@ -606,10 +605,11 @@ macro "Rock pie macro" {
 		minP2size=Dialog.getNumber();
 		if (sizefilt==1) {
 			run("Analyze Particles...", "size=minP2size-Infinity pixel show=Masks");
-			run("Invert");
-			close("nonCon");
+		run("Invert");
+		close("nonCon");
 		}
 
+		waitForUser("check binary");
 		tcready=getImageID();
 		opac=50;
 		if (contrC==tc)
@@ -623,6 +623,7 @@ macro "Rock pie macro" {
 		else
 			saveAs(path3);
 		close();
+		
 		open(path4);
 		disconnectparticles();
 		particles=tc;
