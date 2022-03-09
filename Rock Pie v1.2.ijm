@@ -2,9 +2,9 @@
 //"Rock pie" by Adrian Hornby
 //Component analysis for high-magnification SEM images
 
-//The macro is written in IJ1 Macro language. It segments and measures the area fraction 
-//of background, target components, and non-target components in a greyscale SEM image 
-//and then measures the size and shape of the target components on a single-particle basis.
+//The macro segments and measures the area fraction of background, target components,
+//and non-target components in a greyscale SEM image, and finally measures
+//the size and shape of the target components on a single-particle basis.
 //Output files are saved in a folder using the original image file name as title.
 //MorphoLibJ, Shape Filter, Non-local means denoising and Beat (xlib) plugins are required.
 //See Readme for instructions etc.
@@ -38,50 +38,25 @@ macro "Rock pie macro" {
 		particles1=getImageID();
 			
 		gThr="Set a global threshold for **"+tc+" and "+ntc+"**?";
-		dThr="Set light and dark thresholds for **"+contrC+"**?";
 		tThr="Set a separate threshold for **"+contrC+"**?";
-		itemsT=newArray(gThr, tThr, dThr);	
+		itemsT=newArray(gThr, tThr);	
 		if (thrch=="shades of grey?") 
 			ThrOp=tThr; 
 		if (thrch=="size?")
 			ThrOp=gThr;
 		if (thrch=="size & shade?") {	
 			Dialog.create("Threshold options");
-			itemsT=newArray(gThr, tThr, dThr);
+			itemsT=newArray(gThr, tThr);
 			Dialog.addChoice("threshold options", itemsT, gThr);
 			Dialog.show();
 			ThrOp=Dialog.getChoice();
 		}
 		
 		run("Add Image...", "image=[cropped] x=0 y=0 opacity=70");
-		if (ThrOp==dThr) {
-			run("Threshold...");
-			waitForUser("Set dark threshold", "so that all pixels **darker** than the background are black...\n...then click \"Apply\"");
-			//run("Convert to Mask");
-			run("Close");
-			selectImage(cropped);
-			run("Duplicate...", " ");
-			particles2=getImageID();
-			run("Add Image...", "image=[cropped] x=0 y=0 opacity=70");
-			run("Threshold...");
-			waitForUser("Set light threshold", "so that all pixels **lighter** than the background are white...\n...then click \"Apply\"");
-			run("Close");
-			//run("Convert to Mask");
-			//setThreshold(255, 255);
-			imageCalculator("Add create", particles1, particles2);
-			rename("globalThr");
-			//selectWindow("contrThr");
-			selectImage(particles1);
-			close();
-			selectImage(particles2);
-			close();
-			
-		}
 
-		else if (ThrOp==tThr) {
+		if (ThrOp==tThr) {
 			run("Threshold...");
 			waitForUser("Set threshold", "so that **"+contrC+"** pixels are white and other pixels are black...\n...then click \"Apply\"");
-			///run("Convert to Mask");
 			run("Close");
 			rename("contrThr");
 			selectImage(cropped);
@@ -90,13 +65,10 @@ macro "Rock pie macro" {
 			run("Add Image...", "image=[cropped] x=0 y=0 opacity=70");
 			run("Threshold...");
 			waitForUser("Set global threshold", "so that only **"+bkg+"** pixels are black...\n...then click \"Apply\"");
-			//run("Convert to Mask");
 			run("Close");
 			rename("globalThr");
-			//selectWindow("contrThr");
-			//selectImage(particles2);
-			//close();
 		}
+		
 		else {
 			run("Threshold...");
 			waitForUser("Set threshold", "so that all **"+tc+" and "+ntc+"** pixels are white and "+bkg+ " pixels are black...\n...then click \"Apply\"");
@@ -165,7 +137,6 @@ macro "Rock pie macro" {
 			setThreshold(1, 255);
 			setOption("BlackBackground", true);
 			run("Convert to Mask");
-			//run("Close");
 			run("Set Scale...", "distance="+scaleL+" known="+scale+" pixel=1 unit=um");
 			waitForUser("Check binary");
 			Dialog.create("Disconnect check");
@@ -197,7 +168,6 @@ macro "Rock pie macro" {
 		run("Clear Results");
 		open(path3);
 		ntcimage=getImageID();
-		//run("Invert");
 		Overlay.remove;
 		run("Make Binary");
 		wait(50);
@@ -396,7 +366,7 @@ macro "Rock pie macro" {
 		rbfilt=Dialog.getCheckbox();
 		if (bandc==1) {
 			run("Window/Level...");
-			waitForUser("Set window and level... then click 'Apply (don't worry if it appears to reset)");
+			waitForUser("Set brightness and contrast... then click 'Apply (don't worry if it appears to reset)");
 			run("Apply LUT");
 			if (isOpen("W&L")) {
 				selectWindow("W&L");
@@ -548,7 +518,6 @@ macro "Rock pie macro" {
 			run("Invert");
 			
 			particles=contrC;
-			//run("Invert");
 			fillparticles();
 			rename("contrThr2");
 			if (contrC==tc)
@@ -559,28 +528,24 @@ macro "Rock pie macro" {
 		else {
 			selectWindow("globalThr");
 			print(minPcontSize);
-			//run("Invert");
 			if (bigpart==contrC) {
 				run("Make Binary");
 				run ("Analyze Particles...", "size=minPcontSize-Infinity show=Masks");	
 				run("Invert");
 			}
 			else {
-				//run("Invert");
 				run("Make Binary");
 				run ("Analyze Particles...", "size=0-minPcontSize show=Masks");
 				run("Invert");
 			}
 			
 			particles=contrC;
-			//run("Invert");
 			fillparticles();
 			//contrC=getImageID();
 			if (particles==tc)
 				saveAs(path4);
 			else
 				saveAs(path3);
-			//run("Invert");
 			rename("contrThr2");
 		}
 //manual corrections to target components
@@ -592,7 +557,6 @@ macro "Rock pie macro" {
 		run("Make Binary");
 		run("Invert");
 		rename("nonCon");
-		waitForUser("check binary");
 
 		close("bkg");
 		close("contrThr2");
@@ -610,14 +574,12 @@ macro "Rock pie macro" {
 		close("nonCon");
 		}
 
-		waitForUser("check binary");
 		tcready=getImageID();
 		opac=50;
 		if (contrC==tc)
 			particles=ntc;
 		else 
 			particles=tc;
-		//run("Invert");
 		fillparticles();
 		if (particles==tc)
 			saveAs(path4);
