@@ -11,7 +11,7 @@ Requirements: ImageJ or Fiji v1.52 or newer with a set of plugins enabled by sub
 -	Xlib (Disconnect Particles)
 -	ResultsToExcel (Read and Write Excel)
 
-March 2022: Segmentation by greyscale path working. Segmentation by size working so long as the 'target' and 'non-target' components are defined for size segmentation (e.g. - make sure the background really is the background for this measurement).
+March 2022: v1.1. Segmentation by greyscale path working. Segmentation by size working so long as the 'target' and 'non-target' components are defined for size segmentation (e.g. - make sure the background really is the background for this measurement).
 
 Native image processing and 'cleanup' options are added and segmentation by greyscale path improved.
 - NLMD-processed images now persist through all thresholding steps
@@ -20,6 +20,10 @@ Native image processing and 'cleanup' options are added and segmentation by grey
 - Message added to select the target and non-target components carefully for size segmentation
 - Brightness and contrast option replaced with Window/Level and instruction message added
 - Bandpass filter is now initially a checkbox option (same 'preview first' sequence applies if selected)
+
+- Deleted unnecesary waitforuser prompts
+- Deleted redundant dThr option
+- Changed all optional image processing checkbox defaults to unchecked
 
 The macro has tested using Windows 10, but there should be no compatibility issues with recent versions of Windows or Mac OSs. Most image formats are accepted by ImageJ.
 The macro is designed for use with greyscale images. A range of SEM-SE and BSE images have been tested, but the macro should cope with color images converted to 8-bit greyscale if there is enough contrast between components.
