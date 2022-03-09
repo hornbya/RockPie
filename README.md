@@ -24,6 +24,7 @@ Native image processing and 'cleanup' options are added and segmentation by grey
 - Deleted unnecesary waitforuser prompts
 - Deleted redundant dThr option
 - Changed all optional image processing checkbox defaults to unchecked
+- Updated flowchart
 
 The macro has tested using Windows 10, but there should be no compatibility issues with recent versions of Windows or Mac OSs. Most image formats are accepted by ImageJ.
 The macro is designed for use with greyscale images. A range of SEM-SE and BSE images have been tested, but the macro should cope with color images converted to 8-bit greyscale if there is enough contrast between components.
