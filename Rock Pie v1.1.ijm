@@ -295,7 +295,7 @@ macro "Rock pie macro" {
 	setOption("DebugMode", false);
 	
 	Dialog.create("Define components and run type");
-	Dialog.addMessage("Note: Size-segmentation (if selected) will compare Target and Non-Target components");
+	Dialog.addMessage("Note: Size-segmentation (if selected) will compare Target and Non-target components");
 	Dialog.addString("Target component:", "crystals");
 	Dialog.addString("Non-target component:", "glass");
 	Dialog.addString("Background component:", "voids");
