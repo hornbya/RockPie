@@ -26,7 +26,7 @@ macro "Rock pie macro" {
 //reduce noise and set the  threshold for surface particles
 	function manualthreshold() { 
 		Dialog.create("Non-linear means denoising");
-		Dialog.addCheckbox("Run non-linear means denoising?", 1);
+		Dialog.addCheckbox("Run non-linear means denoising?", 0);
 		Dialog.addMessage("...not recommended for images with poor greyscale contrast between components");
 		Dialog.show();
 		nlmd=Dialog.getCheckbox();
@@ -119,7 +119,7 @@ macro "Rock pie macro" {
 
 	function disconnectparticles () {
 		Dialog.create("Disconnect particles");
-		Dialog.addCheckbox("Separate touching particles?", 1);
+		Dialog.addCheckbox("Separate touching particles?", 0);
 		Dialog.addNumber("Disconnect level 0-1 (1 = max. disconnects, 0.8 = default)", "0.8");
 		Dialog.show();
 		dc=Dialog.getCheckbox();
@@ -212,7 +212,7 @@ macro "Rock pie macro" {
 		run("Make Binary");
 		//run("Invert"); //***************************************************************************
 		Dialog.create("Edges");
-		Dialog.addCheckbox("Exclude "+tc+" on edges from single-particle measurements?", 1);
+		Dialog.addCheckbox("Exclude "+tc+" on edges from single-particle measurements?", 0);
 		Dialog.show();
 		if (Dialog.getCheckbox()==1)
 			run("Shape Filter", "area=0-Infinity area_convex_hull=0-Infinity perimeter=0-Infinity perimeter_convex_hull=0-Infinity feret_diameter=0-Infinity min._feret_diameter=0-Infinity max._inscr._circle_diameter=0-Infinity area_eq._circle_diameter=0-Infinity long_side_min._bounding_rect.=0-Infinity short_side_min._bounding_rect.=0-Infinity aspect_ratio=1-Infinity area_to_perimeter_ratio=0-Infinity circularity=0-Infinity elongation=0-1 convexity=0-1 solidity=0-1 num._of_holes=0-Infinity thinnes_ratio=0-1 contour_temperatur=0-1 orientation=0-180 fractal_box_dimension=0-2 option->box-sizes=2,3,4,6,8,12,16,32,64 add_to_manager draw_holes black_background fill_results_table exclude_on_edges");
@@ -357,7 +357,7 @@ macro "Rock pie macro" {
 		scaleL=x2-x1;
 		run("Set Scale...", "known="+scale+" pixel=1 unit=um");
 		Dialog.create("Image adjustments");
-		Dialog.addCheckbox("Adjust brightness and contrast?", 1);
+		Dialog.addCheckbox("Adjust brightness and contrast?", 0);
 		Dialog.addCheckbox("Run Bandpass filter?", 0);
 		Dialog.addCheckbox("Subtract background? - for uneven background/lighting", 0);
 		Dialog.show();
@@ -482,7 +482,7 @@ macro "Rock pie macro" {
 		manualthreshold();
 		
 		Dialog.create("Filters");
-		Dialog.addCheckbox("Run morphological filters", 1);
+		Dialog.addCheckbox("Run morphological filters", 0);
 		Dialog.addMessage("Morphological filters smooth the boundaries of thresholded objects");
 		Dialog.show();
 		filters=Dialog.getCheckbox();
@@ -563,7 +563,7 @@ macro "Rock pie macro" {
 		selectWindow("nonCon");
 
 		Dialog.create("Apply size filter?");
-		Dialog.addCheckbox("Size filter", 1);
+		Dialog.addCheckbox("Size filter", 0);
 		Dialog.addNumber("Enter minimum particle size in pixels (smaller particles will be removed)", 10);
 		Dialog.show();
 		sizefilt=Dialog.getCheckbox();
