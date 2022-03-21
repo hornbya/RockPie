@@ -20,14 +20,15 @@ Native image processing and 'cleanup' options are added and segmentation by grey
 - Message added to select the target and non-target components carefully for size segmentation
 - Brightness and contrast option replaced with Window/Level and instruction message added
 - Bandpass filter is now initially a checkbox option (same 'preview first' sequence applies if selected)
-
 - Deleted unnecesary waitforuser prompts
 - Deleted redundant dThr option
 - Changed all optional image processing checkbox defaults to unchecked
 - Updated flowchart
 
-The macro has tested using Windows 10, but there should be no compatibility issues with recent versions of Windows or Mac OSs. Most image formats are accepted by ImageJ.
-The macro is designed for use with greyscale images. A range of SEM-SE and BSE images have been tested, but the macro should cope with color images converted to 8-bit greyscale if there is enough contrast between components.
+v1.2. Main changes: added a backout option for NLMD filter, reordered manual editing loop. 
+
+The macro has tested using Windows 10, but there should be no compatibility issues with recent versions of Windows. The macro should work fine on ImageJ for Macs too. Most image formats are accepted by ImageJ.
+The macro is designed for use with greyscale images. A range of SEM-SE and BSE images have been tested, but the macro should cope with color images converted to 8-bit greyscale if there is enough greyscale contrast between components.
 The macro needs to be loaded into ImageJ. You can add it into the ‘macros’ folder in the ImageJ directory, but I prefer to run it through the editor – Plugins > Macros > Edit…
 
 The macro requires the user to define a set of three components – Components are defined as 'target' (the component of interest, with fractional and morphometric data), 'non-target' (an additional component, with fractional data only) and 'background' (with fractional data only). For example, in volcanic rock sections, these could be crystals, glass and voids, respectively.
