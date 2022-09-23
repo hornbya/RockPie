@@ -1,3 +1,6 @@
+
+<a href="https://zenodo.org/badge/latestdoi/467104475"><img src="https://zenodo.org/badge/467104475.svg" alt="DOI"></a>
+
 # RockPie
 RockPie - ImageJ macro for segmentation of SEM imagery into three components
 
